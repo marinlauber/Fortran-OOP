@@ -1,0 +1,11 @@
+language: c
+sudo: required
+before_install:
+  - sudo apt-get install gfortran
+
+script:
+  - gfortran -fprofile-arcs -ftest-coverage -O0 particles.f90 -o particles
+  - ./particles
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t uuid-repo-token
